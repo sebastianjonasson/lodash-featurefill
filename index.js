@@ -82,4 +82,111 @@ module.exports = function(overrideArrayPrototype = false) {
 		}
 
 	});
+
+	var collectionFunctions = [
+		"countBy",
+		"each",
+		"eachRight",
+		"every",
+		"filter",
+		"find",
+		"findLast",
+		"flatMap",
+		"flatMapDeep",
+		"flatMapDepth",
+		"forEach",
+		"forEachRight",
+		"groupBy",
+		"includes",
+		"invokeMap",
+		"keyBy",
+		"map",
+		"orderBy",
+		"partition",
+		"reduce",
+		"reduceRight",
+		"reject",
+		"sample",
+		"sampleSize",
+		"shuffle",
+		"size",
+		"some",
+		"sortBy"
+	];
+
+	collectionFunctions.forEach(function(fnName) {
+		var isNativeFunction = Array.prototype.hasOwnProperty(fnName);
+		
+		if(isNativeFunction && overrideArrayPrototype === false) {
+			return;
+		}
+
+		Array.prototype[fnName] = function(...args) {
+			return _[fnName](this, ...args)
+		}
+
+	});
+
+	var dateFunctions = [
+		"now"
+	];
+
+	dateFunctions.forEach(function(fnName) {
+		var isNativeFunction = Array.prototype.hasOwnProperty(fnName);
+		
+		if(isNativeFunction && overrideArrayPrototype === false) {
+			return;
+		}
+
+		Date.prototype[fnName] = function(...args) {
+			return _[fnName](this, ...args)
+		}
+
+	});
+
+	var stringFunctions = [
+		"camelCase",
+		"capitalize",
+		"deburr",
+		"endsWith",
+		"escape",
+		"escapeRegExp",
+		"kebabCase",
+		"lowerCase",
+		"lowerFirst",
+		"pad",
+		"padEnd",
+		"padStart",
+		"parseInt",
+		"repeat",
+		"replace",
+		"snakeCase",
+		"split",
+		"startCase",
+		"startsWith",
+		"template",
+		"toLower",
+		"toUpper",
+		"trim",
+		"trimEnd",
+		"trimStart",
+		"truncate",
+		"unescape",
+		"upperCase",
+		"upperFirst",
+		"words"
+	];
+
+	stringFunctions.forEach(function(fnName) {
+		var isNativeFunction = Array.prototype.hasOwnProperty(fnName);
+		
+		if(isNativeFunction && overrideArrayPrototype === false) {
+			return;
+		}
+
+		String.prototype[fnName] = function(...args) {
+			return _[fnName](this, ...args)
+		}
+
+	});
 };
